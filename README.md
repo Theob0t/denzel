@@ -10,7 +10,6 @@
 
 - [🐣 Introduction](#-introduction)
 - [🎯 Objectives](#-objectives)
-- [👩‍💻 Just tell me what to do](#%E2%80%8D-just-tell-me-what-to-do)
 - [🏃‍♀️ Steps to do](#%E2%80%8D-steps-to-do)
   - [Definition and Configuration](#definition-and-configuration)
   - [REST endpoints to implement](#rest-endpoints-to-implement)
@@ -19,8 +18,6 @@
     - [`GET /movies/:id`](#get-moviesid)
     - [`GET /movies/search`](#get-moviessearch)
     - [POST /movies/:id](#post-moviesid)
-  - [GraphQL endpoints to implement](#graphql-endpoints-to-implement)
-    - [(A suggested) Schema](#a-suggested-schema)
   - [Bonus - The Client side](#bonus---the-client-side)
 - [🛣️ Related course](#-related-course)
 - [Licence](#licence)
