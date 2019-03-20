@@ -27,6 +27,7 @@ app.listen(process.env.PORT, () => {
 });
 
 //OK
+//Populate the database
 app.get("/movies/populate", async(request, response) => {
 	const movies = await imdb(DENZEL_IMDB_ID);
 	collection.insertMany(movies, (error, result) => {
@@ -35,10 +36,10 @@ app.get("/movies/populate", async(request, response) => {
         }
         response.send(result.result);
 	});
-	console.log("The database has been populated.")
 });
 
 //OK
+//Show random movie
 app.get("/movies", (request, response) => {
 	collection.aggregate([{ $match: { "metascore": {$gt:70}}}, { $sample: { size: 1 }}]).toArray((error, result) => {
         if(error) {
@@ -46,10 +47,10 @@ app.get("/movies", (request, response) => {
         }
         response.send(result);
     });
-    console.log("Query done.");
 });
 
 //OK
+//Search movie with limit of movies to display and minimum score
 app.get("/movies/search", (request, response) => {
 	//if limit in query === undefined then limit default value = 5 else parseInt
     var limit = (request.query.limit === undefined ? 5 : parseInt(request.query.limit));
@@ -65,6 +66,7 @@ app.get("/movies/search", (request, response) => {
 
 
 //OK
+//Show movies from id
 app.get("/movies/:id", (request, response) => {
     collection.findOne({ "id": request.params.id }, (error, result) => {
         if(error) {
@@ -74,3 +76,14 @@ app.get("/movies/:id", (request, response) => {
     });
 });
 
+
+//OK
+//Add a watched date and a review to a specific movie using id
+app.post("/movies/:id", (request, response) => {
+	collection.updateOne({"id": request.params.id}, {$set: {"date":request.body.date, "review":request.body.review}}, (error, result) => {
+        if(error) {
+            return response.status(500).send(error);
+        }
+        response.send(result.result);
+    });
+});
