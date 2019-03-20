@@ -26,7 +26,7 @@ app.listen(9292, () => {
     });
 });
 
-app.post("/movies/populate", async(request, response) => {
+app.get("/movies/populate", async(request, response) => {
 	const movies = await imdb(DENZEL_IMDB_ID);
 	collection.insertMany(movies, (error, result) => {
         if(error) {
@@ -48,13 +48,12 @@ app.get("/movies", (request, response) => {
 });
 
 app.get("/movies/:id", (request, response) => {
-  collection.findOne({ "_id": new ObjectId(request.params.id) }, (error, result) => {
-    if(error) {
-      return response.status(500).send(error);
-    }
-    response.send(result);
-  });
-  console.log("Update done.")
+    collection.findOne({ "id": request.params.id }, (error, result) => {
+        if(error) {
+            return response.status(500).send(error);
+        }
+        response.send(result);
+    });
 });
 
 app.get("/movies/search", (request, response) => {
