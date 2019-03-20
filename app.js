@@ -26,6 +26,7 @@ app.listen(9292, () => {
     });
 });
 
+//OK
 app.get("/movies/populate", async(request, response) => {
 	const movies = await imdb(DENZEL_IMDB_ID);
 	collection.insertMany(movies, (error, result) => {
@@ -37,6 +38,7 @@ app.get("/movies/populate", async(request, response) => {
 	console.log("The database has been populated.")
 });
 
+//OK
 app.get("/movies", (request, response) => {
 	collection.aggregate([{ $match: { "metascore": {$gt:70}}}, { $sample: { size: 1 }}]).toArray((error, result) => {
         if(error) {
@@ -47,6 +49,7 @@ app.get("/movies", (request, response) => {
     console.log("Query done.");
 });
 
+//OK
 app.get("/movies/:id", (request, response) => {
     collection.findOne({ "id": request.params.id }, (error, result) => {
         if(error) {
@@ -57,16 +60,14 @@ app.get("/movies/:id", (request, response) => {
 });
 
 app.get("/movies/search", (request, response) => {
-	var limit = 5, metascore = 0;
-	if(request.query.limit != undefined) limit = request.query.limit;
-	if(request.query.metascore != undefined) metascore = request.query.metascore;
-	
-	collection.aggregate([{$match:{"metascore": {$gte:Number(metascore)}}}, {$limit:Number(limit)}, {$sort:{"metascore":-1}}]).toArray((error, result) => {
+	//if limit in query === undefined then limit default value = 5 else parseInt
+    var limit = (request.query.limit === undefined ? 5 : parseInt(request.query.limit));
+    var metascore = (request.query.metascore === undefined ? 0 : parseInt(request.query.metascore));
+
+    collection.find({"metascore": {$gte: metascore}}).limit(limit).toArray((error, result) => {
         if(error) {
             return response.status(500).send(error);
         }
         response.send(result);
     });
-    console.log("Search done.");
 });
-
