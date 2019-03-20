@@ -35,40 +35,7 @@ He won 2 Oscars. [Another 82 wins & 166 nominations](https://www.imdb.com/name/n
 
 ## 🎯 Objectives
 
-**Build a REST and GRAPHQL API to get the must-watch Denzel's movies**.
-
-## 👩‍💻 Just tell me what to do
-
-<ol>
-<li>Fork the project via `github`
-
-![fork](./fork.png)
-</li>
-
-<li>Clone your forked repository project `https://github.com/YOUR_USERNAME/denzel`
-
-```sh
-❯ cd /path/to/workspace
-❯ git clone git@github.com:YOUR_USERNAME/denzel.git
-```
-</li>
-
-<li><strong>Do things</strong></li>
-<li>Commit and push your different modifications
-
-```sh
-❯ cd /path/to/workspace/denzel
-❯ git add -A && git commit -m "feat(movies): get a random movie"
-❯ git push origin master
-```
-</li>
-</ol>
-
-**Note**:
-
-* [why following a commit message convention?](https://www.conventionalcommits.org)
-* if you catch an error about authentication, [add your ssh to your github profile](https://help.github.com/articles/connecting-to-github-with-ssh/).
-* If you need some helps on git commands, read [git - the simple guide](http://rogerdudler.github.io/git-guide/)
+**Build a REST API to get the must-watch Denzel's movies**.
 
 ## 🏃‍♀️ Steps to do
 
@@ -200,53 +167,6 @@ This endpoint accepts the following post parameters:
 ❯ curl -X POST -d '{"date": "2019-03-04", "review": "😍 🔥"}' -H "Content-Type: application/json" http://localhost:9292/movies/tt0328107
 {
   "_id": "507f191e810c19729de860ea"
-}
-```
-
-
-### GraphQL endpoints to implement
-
-Same definitions as REST API with `/graphql` endpoint.
-
-* Populate the database
-* Fetch a random **must-watch** movie
-* Fetch a specific movie
-* Search for Denzel's movies
-* Save a watched date and a review.
-
-#### (A suggested) Schema
-
-```
-schema {
-  query Query
-}
-
-type Query {
-  movies: [Movie]
-  movie: Movie
-}
-
-type Movie {
-  link: String
-  metascore: Int
-  synopsis: String
-  title: String
-  year: Int
-}
-```
-
-```sh
-❯ curl -d '{"query": "movie {link metascore synopsis title year}"}' -H "Content-Type: application/json" http://localhost:9292/graphql
-{
-  "data": {
-    "movie": {
-      "link": "https://www.imdb.com/title/tt0174856/?ref_=nm_flmg_act_23",
-      "metascore": 74,
-      "synopsis": "The story of Rubin \"Hurricane\" Carter, a boxer wrongly imprisoned for murder, and the people who aided in his fight to prove his innocence.",
-      "title": "Hurricane Carter (1999)",
-      "year": 1999
-    }
-  }
 }
 ```
 
