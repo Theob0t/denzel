@@ -1,6 +1,6 @@
 # DENZEL
 
-> The must-watch Denzel's movies : <a href="https://denzelbotella.herokuapp.com/">API DEPLOYED</a>
+> The must-watch Denzel's movies : <a href="https://denzelbotella.herokuapp.com/movies/populate">LINK TO MY DENZEL_API</a>
 
 ![denzel](https://m.media-amazon.com/images/M/MV5BMjE5NDU2Mzc3MV5BMl5BanBnXkFtZTcwNjAwNTE5OQ@@._V1_SY1000_SX750_AL_.jpg)
 
