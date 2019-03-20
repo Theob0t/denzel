@@ -15,7 +15,7 @@ app.use(BodyParser.urlencoded({ extended: true }));
 
 var database, collection;
 
-app.listen(9292, () => {
+app.listen(process.env.PORT, () => {
     MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
         if(error) {
             throw error;
@@ -50,15 +50,6 @@ app.get("/movies", (request, response) => {
 });
 
 //OK
-app.get("/movies/:id", (request, response) => {
-    collection.findOne({ "id": request.params.id }, (error, result) => {
-        if(error) {
-            return response.status(500).send(error);
-        }
-        response.send(result);
-    });
-});
-
 app.get("/movies/search", (request, response) => {
 	//if limit in query === undefined then limit default value = 5 else parseInt
     var limit = (request.query.limit === undefined ? 5 : parseInt(request.query.limit));
@@ -71,3 +62,15 @@ app.get("/movies/search", (request, response) => {
         response.send(result);
     });
 });
+
+
+//OK
+app.get("/movies/:id", (request, response) => {
+    collection.findOne({ "id": request.params.id }, (error, result) => {
+        if(error) {
+            return response.status(500).send(error);
+        }
+        response.send(result);
+    });
+});
+
